@@ -7,8 +7,7 @@ def main():
     st.title("Seed Clustering")
     
     # Generate random seed data
-    np.random.seed(123)
-    seeds = np.random.rand(100, 2)
+    seeds = generate_seed_data()
     
     # Perform clustering
     kmeans = KMeans(n_clusters=3)
@@ -23,11 +22,20 @@ def main():
         st.dataframe(seeds, width=400)
     if st.sidebar.button("Show Cluster Labels"):
         st.write(labels)
+    if st.sidebar.button("Generate New Data"):
+        seeds = generate_seed_data()
+        kmeans.fit(seeds)
+        labels = kmeans.labels_
     
     # Visualize the clusters
     st.subheader("Cluster Visualization")
     plot_clusters(seeds, labels)
     
+def generate_seed_data():
+    np.random.seed(123)
+    seeds = np.random.rand(100, 2)
+    return seeds
+
 def plot_clusters(data, labels):
     plt.scatter(data[:, 0], data[:, 1], c=labels, cmap='viridis')
     plt.xlabel("Feature 1")
