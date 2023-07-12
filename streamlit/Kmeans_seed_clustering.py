@@ -3,12 +3,6 @@ import numpy as np
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-
-def generate_seed_data():
-    np.random.seed(123)
-    seeds = np.random.rand(100, 2)
-    return seeds
-
 def main():
     st.title("Seed Clustering")
     
@@ -36,7 +30,12 @@ def main():
     # Visualize the clusters
     st.subheader("Cluster Visualization")
     plot_clusters(seeds, labels)
-
+    
+def generate_seed_data():
+    np.random.seed(123)
+    seeds = np.random.rand(100, 2)
+    return seeds
+    
 def plot_clusters(data, labels):
     plt.scatter(data[:, 0], data[:, 1], c=labels, cmap='viridis')
     plt.xlabel("Feature 1")
