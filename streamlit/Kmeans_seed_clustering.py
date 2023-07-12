@@ -17,6 +17,13 @@ def main():
     # Get the cluster labels
     labels = kmeans.labels_
     
+    # Sidebar buttons
+    st.sidebar.subheader("Actions")
+    if st.sidebar.button("Show Data"):
+        st.dataframe(seeds, width=400)
+    if st.sidebar.button("Show Cluster Labels"):
+        st.write(labels)
+    
     # Visualize the clusters
     st.subheader("Cluster Visualization")
     plot_clusters(seeds, labels)
